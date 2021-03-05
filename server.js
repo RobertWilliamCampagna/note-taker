@@ -1,12 +1,8 @@
-// Import Dependencies & Routes
-// const express = require('express');
-const htmlRoutes = require('./routes/htmlRoutes');
-const apiRoutes = require('./routes/apiRoutes');
-const db = require('./db/db.json');
-// Defining PORT to use & calling Express
+
 const express = require('express');
 const path = require('path');
-const { fstat } = require('fs');
+const  fs  = require('fs');
+const { notes } = require('./data/notes.json');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -19,16 +15,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
+// const app = require('express')
 // // Routes to express network
-app.use('/api', apiRoutes);
-app.use('/', htmlRoutes);
+// app.use('/api', apiRoutes);
+// app.use('/', htmlRoutes);
 
 function filterByQuery(query, notesArray) {
   let filteredResults = notesArray;
   if(query.title) {
     filteredResults = filteredResults.filter(notes => notes.title === query.title);
   }
-  if (query, text ) {
+  if (query.text ) {
     filteredResults = filteredResults.filter(notes => notes.text === query.text);
   }
   return filteredResults;
@@ -44,7 +41,7 @@ function createNote(body, notesArray){
   const note= body;
   notesArray.push(note);
   fs.writeFileSync(
-    path.join(__dirname, './db/db.json'),
+    path.join(__dirname, './data/notes.json'),
     JSON.stringify({ notes: notesArray}, null, 2)
   );
 }
@@ -59,10 +56,10 @@ function checkNote(note){
   return true;
 }
 
-
+//  Gets 
 app.get('/api/notes', (req,res) => {
   let result = notes;
-  if(require.query){
+  if(req.query){
     result = filterByQuery(req.query, result);
   }
   res.json(result);

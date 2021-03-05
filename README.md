@@ -1,5 +1,10 @@
 # The Bob Note Taker
 <br>
+Landing Page Image:<br>
+<a href="https://i.imgur.com/AUnFHvu.png"></a><br>
+Take Note Page<br>
+<a href="https://i.imgur.com/eVGszIj.png"></a><br>
+
 
 ## Table of Contents
 *[About](#about)<br>

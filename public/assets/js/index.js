@@ -1,5 +1,3 @@
-alert();
-
 
 let noteTitle;
 let noteText;

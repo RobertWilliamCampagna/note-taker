@@ -59,6 +59,7 @@ function checkNote(note){
   return true;
 }
 
+
 app.get('/api/notes', (req,res) => {
   let result = notes;
   if(require.query){
@@ -78,7 +79,7 @@ app.get('/api/notes/:id', (req, res) =>{
 
 app.post('/api/notes', (req, res ) => {
   req.body.id = notes.length.toString();
-  if (!validateNote(req.body)) {
+  if (!checkNote(req.body)) {
     res.status(400).send('Please use correct format for making a note.');
   } else {
     const note = createNote(req.body, notes);
